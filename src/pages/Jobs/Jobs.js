@@ -8,9 +8,9 @@ import JobCard from "../../components/JobCard/JobCard";
 const Jobs = ({navigation}) => {
 
     const { loading, data, error } = useFetch(Config.API_URL + '?page=1')
+    
 
     const handleJobSelect = job => {
-        console.log(job)
         navigation.navigate('DetailsPage', {job})
     }
 

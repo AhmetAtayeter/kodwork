@@ -5,29 +5,36 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Jobs from "./src/pages/Jobs/Jobs";
 import Details from "./src/pages/Details/Details";
 import Favorites from "./src/pages/Favorites/Favorites";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createDrawerNavigator, DrawerToggleButton } from "@react-navigation/drawer";
+import { useSelector } from "react-redux";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function Root() {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="JobsPage" component={Jobs} options={{  title: 'Jobs' }} />
-      <Drawer.Screen name="FavoritesPage" component={Favorites} />
+    <Drawer.Navigator
+      
+      screenOptions={{
+        drawerActiveTintColor: '#ee534f',
+        headerShown: false
+      }}>
+      <Drawer.Screen
+        name="JobsPage"
+        component={Jobs}
+        options={{ title: 'Jobs', headerTitleStyle: { color: '#ee534f', fontSize: 24 } }} />
+      <Drawer.Screen
+        name="FavoritesPage"
+        component={Favorites}
+        options={{ title: 'Favorited Jobs', headerShown: false }} />
     </Drawer.Navigator>
   );
 }
 
 const Router = () => {
-
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen 
-          name= "JobsPage" 
-          component={Jobs}
-          options={{ title: 'Jobs', headerTitleStyle: { color: '#ee534f', fontSize: 24 }  }} /> */}
         <Stack.Screen
           name="Root"
           component={Root}

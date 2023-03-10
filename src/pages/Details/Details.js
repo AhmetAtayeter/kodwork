@@ -1,10 +1,11 @@
-import React , { useEffect }from "react";
+import React , { useEffect, useState }from "react";
 import { View, Text, Dimensions, ScrollView } from "react-native";
 import styles from './Details.style'
 import RenderHTML from "react-native-render-html";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch } from "react-redux";
 
 
 const Details = ({ route,navigation }) => {
@@ -12,11 +13,15 @@ const Details = ({ route,navigation }) => {
     const { job } = route.params
     const width = Dimensions.get('window').width
     const source = { html: job.contents }
-    console.log(job.contents)
+    const dispatch = useDispatch()
 
     useEffect(()=>{
         navigation.setOptions({ title: job.categories[0].name})
     },[])
+
+    function addFavorite(){ 
+        dispatch({type: 'SET_FAV',payload: {job}})
+    }
 
     return (
         <ScrollView style={styles.container}>
@@ -41,7 +46,7 @@ const Details = ({ route,navigation }) => {
                     <Icon name="login" size={30} color="white" />
                     <Text style={styles.text5}>Submit</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button1}>
+                <TouchableOpacity style={styles.button1} onPress={addFavorite}>
                     <Icon name="favorite" size={30} color="white" />
                     <Text style={styles.text5}>Favorite Job</Text>
                 </TouchableOpacity>
