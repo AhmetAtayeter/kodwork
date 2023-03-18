@@ -4,7 +4,6 @@ import styles from './Details.style'
 import RenderHTML from "react-native-render-html";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch } from "react-redux";
 
 
@@ -20,7 +19,7 @@ const Details = ({ route,navigation }) => {
     },[])
 
     function addFavorite(){ 
-        dispatch({type: 'SET_FAV',payload: {job}})
+        dispatch({type: 'SET_FAV',payload: job})
     }
 
     return (

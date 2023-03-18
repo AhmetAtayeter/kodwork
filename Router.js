@@ -6,7 +6,6 @@ import Jobs from "./src/pages/Jobs/Jobs";
 import Details from "./src/pages/Details/Details";
 import Favorites from "./src/pages/Favorites/Favorites";
 import { createDrawerNavigator, DrawerToggleButton } from "@react-navigation/drawer";
-import { useSelector } from "react-redux";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();

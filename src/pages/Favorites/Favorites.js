@@ -1,29 +1,28 @@
-import React, { useEffect } from "react";
-import { SafeAreaView,Text } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { SafeAreaView,Text, ActivityIndicator, FlatList } from "react-native";
+import { useSelector } from "react-redux";
+import styles from "./Favorites.style"
 
-//AsyncStorage.getItem('@FAVORITES', favorites)
-
-const Favorites = async () => {
-
-    //const dispatch = useDispatch()
-    useEffect(() => {
-        //const  {favorites} = useSelector(s => s.favorites)
-        const favs = () => dispatch({type: 'SET_FAV'})
-        if (favs !== null) {
-            console.log("favs")
-            console.log(favs)
-        }
-    }, [])
+const Favorites = () => {
     
-    //const  {favorites} = useSelector(s => s.favorites)
-    // console.log(favorites)
+    const  favorites = useSelector(s => s.favorites)
+    const loading = useSelector(s => s.isFavsLoading)
+    // console.log(loading)
+    console.log(favorites)
+
+    const renderFavorites = ({item}) => <Text>{item.company.name}</Text>
+
+    if (loading) {
+        return <ActivityIndicator size="large" />
+    }
+
     return(
-        <SafeAreaView>
-            <Text>
-                {/* {favorites} */}
-            </Text>
+        <SafeAreaView style={styles.container}>
+            <FlatList 
+                data= {favorites}
+                renderItem={renderFavorites}
+                // key={favorites.company.id}
+                />
         </SafeAreaView>
     )
 }

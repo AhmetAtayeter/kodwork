@@ -7,18 +7,18 @@ import reducers from "./reducers";
 
 const FavProvider = ({ children }) => {
 
-    const [favorites, setFavorites] = useState(null)
+    const [favorites, setFavorites] = useState([])
     const [isFavsLoading, setFavsLoading] = useState(true)
 
     useEffect(() => {
         AsyncStorage.getItem('@FAVORITES').then(favoritesSession => {
-            favoritesSession && setFavorites(JSON.parse(favoritesSession))
-            setFavsLoading(false)
-        }).catch(error => console.log(error))
-        
-        if(favorites !== null){
+            console.log("fav")
             console.log(favorites)
-        }
+            favoritesSession && setFavorites(favorites => [...favorites, JSON.parse(favoritesSession)])
+            setFavsLoading(false)
+            console.log(favorites)
+        }).catch(error => console.log(error))
+    
     },[])
 
     const store = createStore(reducers, { favorites,isFavsLoading })
